@@ -1,0 +1,6 @@
+{"whitelist": {
+  "arn:aws:iam::012345678912:role/terraform": "Iam role filter, showing the * on non region setup.",
+  "arn:aws:ec2:*:*:*": "All EC2 Resources",
+  "arn:aws:*::123456789012:*": "All Resources for account 123456789012"
+  }
+}

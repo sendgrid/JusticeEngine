@@ -1,0 +1,4 @@
+# These libraries are required on top of the required libraries within Security Monkey
+arrow>=0.12.1
+bandit>=1.4.0
+sendgrid>=5.3.0

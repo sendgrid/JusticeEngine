@@ -1,0 +1,26 @@
+[
+  {
+    "AccountName": "prod_website",
+    "AccountNumber": "012345678912",
+    "ContactEmail": "prodfolks@example.com",
+    "HipChatRoom": 31337,
+  },
+  {
+    "AccountName": "prod_backend",
+    "AccountNumber": "987654321098",
+    "ContactEmail": "prodfolks@example.com",
+    "HipChatRoom": 12701,
+  },
+  {
+    "AccountName": "preprod_backend",
+    "AccountNumber": "012345678912",
+    "ContactEmail": "devfolks@example.com",
+    "HipChatRoom": 12702,
+  },
+  {
+    "AccountName": "preprod_website",
+    "AccountNumber": "987654321098",
+    "ContactEmail": "devfolks@example.com",
+    "HipChatRoom": 13370,
+  }
+]

@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+echo "[+] Building the Justice Engine."
+
+echo "[i] running a security scan..."
+bandit -r . -x venv
+
+echo
+echo '[i] starting build...'
+rm -f Justice-Engine.zip
+
+rm -rf dist && mkdir dist
+rsync -a --exclude='dist' --exclude='venv' --exclude='.git' . dist/
+
+cd dist
+zip -9 -r Justice-Engine.zip .
+cd ..
+mv dist/Justice-Engine.zip .
+
+echo "[i] cleaning up..."
+rm -rf dist
+
+echo "[+] done! Justice-Engine.zip ready for Deployment"
+
+echo "[i] this can be performed with \n scp Justice-Engine.zip <SECMONKEY_HOST>:<PATHTOSECURITYMONKEY>/Justice-Engine.zip"

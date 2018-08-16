@@ -1,0 +1,58 @@
+#!/bin/bash
+set -e
+
+echo "[+] Testing if we are in the right location within Security Monkey"
+
+path=$PWD
+cd ..
+secmonkeypath=$PWD;
+
+if [[ ! -r "security_monkey" && ! -r "LICENSE" ]]
+then
+  # given that there are two security monkey directories
+  # security_monkey and security_monkey/security_monkey
+  # I am going to check if we are in the other directory we know
+  if [[ -r "watcher.py" && -r "auditor.py" && -r "alerter.py" ]]
+  then
+    cd .. ;
+
+    if [[ -r "security_monkey" && -r "LICENSE" ]]
+    then
+      secmonkeypath=$PWD;
+    fi
+    cd - > /dev/null ;
+    fi
+fi
+
+cd $secmonkeypath
+if grep -q "gitter.im/Netflix/security_monkey" "README.md"
+then
+  echo "[!] $secmonkeypath is not the root directory of Security Monkey. Please place the Justice-Engine.zip within the directory containing Security Monkey";
+  exit 1;
+fi
+
+echo "[+] Moving Justice Engine Files into Security Monkey"
+mkdir -p "${secmonkeypath}/security_monkey/security_monkey/export/krampus_alerters/"
+cp -f "${path}/Justice-Engine-source/security_monkey/export/krampus_alerters/__init__.py" "${secmonkeypath}/security_monkey/export/krampus_alerters/"
+cp -f "${path}/Justice-Engine-source/security_monkey/export/krampus_alerters/alerter_abs.py" "${secmonkeypath}/security_monkey/export/krampus_alerters/"
+cp -f "${path}/Justice-Engine-source/security_monkey/export/krampus_alerters/hipchat_handler.py" "${secmonkeypath}/security_monkey/export/krampus_alerters/"
+cp -f "${path}/Justice-Engine-source/security_monkey/export/krampus_alerters/sendgrid_handler.py" "${secmonkeypath}/security_monkey/export/krampus_alerters/"
+
+mkdir -p "${secmonkeypath}/security_monkey/alerters/custom/"
+touch "${secmonkeypath}/security_monkey/alerters/custom/__init__.py"
+cp -f "${path}/Justice-Engine-source/security_monkey/alerters/custom/JusticeEngine.py" "${secmonkeypath}/security_monkey/alerters/custom/"
+
+echo "[+] Appending the Dependencies for Justice Engine into Security Monkey"
+cat "${path}/justice-engine-requirements.txt" >> "${secmonkeypath}/requirements.txt"
+
+echo "[+] Making modifications to existing Security Monkey Resource:"
+echo "    ${secmonkeypath}/security_monkey/task_scheduler/alert_scheduler.py"
+echo "saving backup of existing alert_scheduler as alert_scheduler.py.bkp"
+cp -n "${secmonkeypath}/security_monkey/task_scheduler/alert_scheduler.py" "${secmonkeypath}/security_monkey/task_scheduler/alert_scheduler.py.bkp"
+cp -f "${path}/Justice-Engine-source/security_monkey/task_scheduler/alert_scheduler.py" "${secmonkeypath}/security_monkey/task_scheduler/alert_scheduler.py"
+
+echo "[+] cleaning up."
+cd $secmonkeypath
+rm "Justice-Engine.zip" && rm -rf "justice"
+
+echo "[+] done! Restart your Securty Monkey Watcher for the Justice Engine to run."
