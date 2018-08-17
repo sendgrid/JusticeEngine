@@ -28,7 +28,7 @@ These actions are performed by the Security Monkey Worker instances within Secur
 
 The Justice Engine works as a custom Alerter by iterating through these audit results and actioning them. Specifically:
 
-1. Scoring the item that was audited.
+1. Scoring the item that was audited. 
 2. Comparing it against a threshold.
 3. Mapping the audited resource to a specific AWS resource that Krampus can Action.
 4. Storing these items that need to be actioned externally.
