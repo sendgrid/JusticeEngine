@@ -20,7 +20,7 @@ The Justice Engine is a custom alerter for the [Neflix Security Monkey Project](
 - [About](#about)
 - [Licensing](#license)
 
-<a name='overview'></a>
+<a name='overview'></a> 
 ## Overview
 
 Custom Alerters in Security Monkey extend the custom_alerter metaclass and are provided with a list of auditor items so that your custom alerter can perform actions.
