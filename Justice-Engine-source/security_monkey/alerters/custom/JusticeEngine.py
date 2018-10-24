@@ -61,7 +61,6 @@ class Notify:
         tmp = self.key.get_contents_as_string()
         return json.loads(tmp)
 
-
     def write_to_s3_object(self, filename, data):
         """ Write to s3
             :param filename: the s3 object file name
@@ -318,7 +317,7 @@ class Jury():
             :param item: the secmonkey item containing the arn
             :return: string account id result.
         """
-        #base_arn = Jury.get_case_insensitive_arn(item)
+        # base_arn = Jury.get_case_insensitive_arn(item)
 
         return str(db.session.query(Account.identifier).filter(
             Account.name == item.account).one()[0])
@@ -445,6 +444,7 @@ class Jury():
                 return True
         return False
 
+
 class Justice(object):
     """ The Judge that serves the Jury's verdict to Krampus.
         The Judge class faciliates the actions to be made for any set of issues
@@ -536,4 +536,3 @@ class Justice(object):
         app.logger.debug("Sending Alerts to Account Owners.")
         schedule_krampus_alerts.s(current_run_audit_time)
         app.logger.debug("Justice Engine Complete. Closing.")
-

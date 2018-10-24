@@ -8,6 +8,7 @@ from security_monkey.common.sts_connect import connect
 from security_monkey.export.krampus_alerters import *
 from boto.s3.key import Key
 
+
 def s3connect(account, bucket):
     """ s3connect will attempt to connect to an s3 bucket resource.
         If the resource does not exist it will attempt to create it
@@ -28,6 +29,7 @@ def s3connect(account, bucket):
     key = Key(bucket)
     return conn, bucket, key
 
+
 def get_s3_key(conn, bucket, key, filename):
     """ Return the key contents for a specific s3 object
         :param bucket: the bucket to connect to
@@ -43,6 +45,7 @@ def get_s3_key(conn, bucket, key, filename):
     key.key = filename
     tmp = key.get_contents_as_string()
     return json.loads(tmp)
+
 
 @CELERY.task(bind=True, max_retries=3)
 def schedule_krampus_alerts(self, actioned_time):
