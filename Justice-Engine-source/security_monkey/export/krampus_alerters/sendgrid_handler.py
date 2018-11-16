@@ -6,6 +6,7 @@ import sendgrid
 from security_monkey import app
 from alerter_abs import AbstractAlerter
 
+
 class SendgridHandler(AbstractAlerter):
     @staticmethod
     def make_local_from_timestamp(timestamp, timezone):
@@ -105,7 +106,6 @@ class SendgridHandler(AbstractAlerter):
         """
         return message.replace('\n', '\n\n')
 
-
     @staticmethod
     def send_email(sender, recipient, message, sg):
         """
@@ -185,4 +185,3 @@ class SendgridHandler(AbstractAlerter):
 
         for email in emails:
             SendgridHandler.send_email(sender, email[0], email[1], sg)
-

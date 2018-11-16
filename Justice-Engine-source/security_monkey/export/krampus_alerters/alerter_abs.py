@@ -12,4 +12,3 @@ class AbstractAlerter(object):
         :return: boolean of success or failure
         """
         raise NotImplementedError("Alerters must have an action method implemented.")
-
