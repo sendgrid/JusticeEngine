@@ -1,4 +1,5 @@
 # the Justice Engine
+![Justice Engine Logo](/docs/Justice-Engine.png)
 The Judge and Jury custom alerter for Security Monkey.
 
 ## What is the Justice Engine?
